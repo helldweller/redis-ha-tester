@@ -49,14 +49,20 @@ func Run() {
     
     http.HandleFunc("/", func(res http.ResponseWriter, req *http.Request) {
         if req.Method == "POST" {
-            log.Info("it`s POST!")
+            // write to redis kv
+            // hash of uri is k, v is post body
+            log.Info("set ok")
+        }
+        if req.Method == "GET" {
+            // get v by k from redis, hash of uri is k
+            // put v to result
+            log.Info("get ok")
         }
         fmt.Fprint(res, "Hello: "+req.Host)
     })
     
     group.Go(func() error {
         log.Infof("Starting web server on %s", conf.HTTPListenIPPort)
-        log.Infof("server: %v", server)
         err := server.ListenAndServe()
         return err
     })
