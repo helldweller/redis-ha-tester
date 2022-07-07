@@ -1,0 +1,7 @@
+Dockerfile
+.github
+.git
+.gitignore
+skaffold.yaml
+skaffold/
+src/main
