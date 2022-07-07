@@ -1,7 +1,7 @@
 
 # redis-ha-tester (IN DEVELOPMENT)
 
-This application is for load testing Redis Server
+This application is for load testing Redis Server / Cluster
 
 ## Use case
 
