@@ -35,4 +35,4 @@ spec:
             - name: LOG_LEVEL
               value: info
             - name: REDIS_CLUSTER_SERVICE_HOST
-              value: "redis-cluster.redis-cluster.svc.cluster.local"
+              value: "redis-cluster.redis-cluster.svc.cluster.local:6379"
