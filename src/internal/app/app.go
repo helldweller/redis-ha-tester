@@ -65,15 +65,14 @@ func Run() {
 				res.WriteHeader(http.StatusRequestEntityTooLarge)
 				log.Warnf("%s, %s, %s, %s", req.Method, req.Host, req.RequestURI, err)
 				return
-			} else {
-				err = rdb.Set(ctx, key, body, expiration).Err()
-				if err != nil {
-					res.WriteHeader(http.StatusInternalServerError)
-					log.Errorf("Redis key setting error. %s, key: %s", err, key)
-					return
-				}
-				fmt.Fprint(res, "OK")
 			}
+			err = rdb.Set(ctx, key, body, expiration).Err()
+			if err != nil {
+				res.WriteHeader(http.StatusInternalServerError)
+				log.Errorf("Redis key setting error. %s, key: %s", err, key)
+				return
+			}
+			fmt.Fprint(res, "OK")
 		}
 		if req.Method == "GET" {
 			val, err := rdb.Get(ctx, key).Result()
@@ -84,6 +83,7 @@ func Run() {
 			if err != nil {
 				res.WriteHeader(http.StatusInternalServerError)
 				log.Errorf("Redis key getting error. %s, key: %s", err, key)
+				return
 			}
 			fmt.Fprint(res, val)
 		}
